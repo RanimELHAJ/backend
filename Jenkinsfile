@@ -4,10 +4,9 @@ pipeline {
             stage('Checkout GIT'){
                 steps{
                     echo 'Pulling...';
-                    git branch: 'badisBack',
+                    git branch: 'main',
                  
-                    url : 'https://github.com/khalsibadis/devOps-Backend.git',
-                       credentialsId: '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';
+                    url : 'https://github.com/RanimELHAJ/backend.git';
                              }
                              }
 
@@ -34,38 +33,29 @@ pipeline {
                                               
                                         }
                            }
-                             stage('MVN SONARQUBE ')
-                                            {
-                                                steps{
-                                                sh  'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-                                                }
-                                            }
-                                            stage("nexus deploy"){
-                                                           steps{
-                                                                   sh 'mvn  deploy'
-                                                           }
-                                                      }
+                             
+
                     stage('Build docker image'){
                                                  steps{
                                                      script{
-                                                        sh 'docker build -t badiskhalsi/springproject .'
+                                                        sh 'docker build -t ranimelhaj/springproject .'
                                                      }
                                                  }
                                              }
 
                                               stage('Docker login') {
 
-                                                                                      steps {
-                                                                                       sh 'echo "login Docker ...."'
-                                                                	sh 'docker login -u badiskhalsi -p badis160698'
-                                                                            }  }
+                                                        steps {
+                                                                    sh 'echo "login Docker ...."'
+                                                                	sh 'docker login -u ranimelhaj -p ranim123*'
+                                                                 }  }
 
 
           stage('Docker push') {
 
                            steps {
                                 sh 'echo "Docker is pushing ...."'
-                               	sh 'docker push badiskhalsi/springproject'
+                               	sh 'docker push ranimelhaj/springproject'
                                   }  }
 
                                      stage('Docker compose') {

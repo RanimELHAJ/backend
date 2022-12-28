@@ -58,11 +58,11 @@ pipeline {
                                	sh 'docker push ranimelhaj/springproject'
                                   }  }
 
-                                     stage('Docker compose') {
+                              /*       stage('Docker compose') {
 
                           steps {
                                sh 'docker-compose up -d'
-                                 }  }
+                                 }*/  }
 
 
 

@@ -33,6 +33,12 @@ pipeline {
                                               
                                         }
                            }
+                          stage('MVN deploy'){
+                                              steps{
+                                                  sh  'mvn deploy'
+                                              
+                                        }
+                           }
                              
 
                     stage('Build docker image'){
@@ -58,11 +64,7 @@ pipeline {
                                	sh 'docker push ranimelhaj/springproject'
                                   }  }
 
-                              /*       stage('Docker compose') {
-
-                          steps {
-                               sh 'docker-compose up -d'
-                                 }*/  }
+                                }
 
 
 

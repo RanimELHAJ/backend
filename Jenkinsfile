@@ -1,5 +1,10 @@
 pipeline {
-       agent any
+       agent{
+
+        environment {
+        USERNAME = 'ranimelhaj'
+        PASSWORD = 'ranim123*'
+           }
         stages{
             stage('Checkout GIT'){
                 steps{
@@ -53,7 +58,8 @@ pipeline {
 
                                                         steps {
                                                                     sh 'echo "login Docker ...."'
-                                                                	sh 'docker login -u ranimelhaj -p ranim123*'
+                                                                    sh 'docker login registry.docker.com -u ${USERNAME} -p ${PASSWORD}'
+                                                                	//sh 'docker login -u ranimelhaj -p ranim123*'
                                                                  }  }
 
 
@@ -74,4 +80,4 @@ pipeline {
 
 	
 
-}
+}}

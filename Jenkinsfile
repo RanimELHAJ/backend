@@ -1,11 +1,16 @@
 pipeline {
-       agent{
-
-        environment {
-        USERNAME = 'ranimelhaj'
-        PASSWORD = 'ranim123*'
-           }
+       agent any
+       environment {
+        DOCKERHUB_CREDENTIALS= credentials('ellat7eb')
+       }
         stages{
+             /*stage('Init'){
+                steps{
+                    echo ' $DOCKERHUB_CREDENTIALS _PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                  
+                     }
+                             }
+                             */
             stage('Checkout GIT'){
                 steps{
                     echo 'Pulling...';
@@ -53,14 +58,19 @@ pipeline {
                                                      }
                                                  }
                                              }
+                                             stage('Docker login'){
+                                                    steps{
+                                                    echo ' $DOCKERHUB_CREDENTIALS _PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                  
+                                                     }
+                                                         }
 
-                                              stage('Docker login') {
+                                              /*stage('Docker login') {
 
                                                         steps {
                                                                     sh 'echo "login Docker ...."'
-                                                                    sh 'docker login registry.docker.com -u ${USERNAME} -p ${PASSWORD}'
-                                                                	//sh 'docker login -u ranimelhaj -p ranim123*'
-                                                                 }  }
+                                                                	sh 'docker login -u ranimelhaj -p ranim123*'
+                                                                 }  }*/
 
 
           stage('Docker push') {
@@ -80,4 +90,4 @@ pipeline {
 
 	
 
-}}
+}
